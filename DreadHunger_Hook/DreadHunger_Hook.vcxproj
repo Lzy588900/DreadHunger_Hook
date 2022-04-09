@@ -54,10 +54,14 @@
     <ClInclude Include="kiero\minhook\src\trampoline.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DreadHunger  (1).CT" />
     <None Include="kiero\minhook\dll_resources\MinHook.def" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="kiero\minhook\dll_resources\MinHook.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Dreadhunger.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

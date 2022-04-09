@@ -1,0 +1,70 @@
+Imagebase 7FF6DD2C0000
+ByteProperty 7FF6E1DA995C
+4AE994C
+4AE248C
+Base+4AE248C =Gname
+
+
+SeamlessTravel FlushLevelStreaming
+
+7FF73BB453B0-7FF736F00000
+4C4 53B0  
+Base+4C453B0=Uworld
+
+
+30 88  Actor
+
+130
+x 124
+y 128
+z 12c
+
+11c
+120
+124
+
+1D0
+1D4
+1D8
+1DE4BDF380
+1Da2d4050b0
+
+BP_StorageTrunk_Medical_C =医生包   1
+BP_StorageTrunk_Ammo_C =弹药箱   1
+BP_CoveredCrate_Storage_Low_C=储藏室  1
+BP_OfficerSkeleton_C=坟墓 1 
+BP_CoalStorage_Sled_C=煤炭  1
+BP_CoalStorage_Sled_V2_C=煤炭  1
+BP_Cannibal_Stirage_8_C=尸体  1
+BP_Skeleton_Naked_04_C=骷髅     1BP_Skeleton_Naked_04_Snow_C=骨骼  1 BP_Skeleton_Naked_05_Snow_C=骨骼  1
+BP_StrongBox_NoSnow_C=保险箱 1
+
+
+BP_StorageTrunk_Supplies_C =物资箱
+BP_Workbench_C=工作台
+BP_Stick_Pickup_C=木板
+
+BP_Rock_Pickup_C=石头
+BP_Splatter_Decal_C=尸体
+
+BP_Coal_Pickup_C=煤炭
+BP_StrongBox_Movable_C=保险箱
+
+BP_Prey_Seal_C=海豹
+BP_Prey_Rabbit_C=兔子
+BP_BoneClup_Pickup_C=骨头
+BP_Sword_Pickup_C=军刀
+BP_Predator_Wolf_C=狼
+
+
+PlayerName
+0x300
+状态是0x240
+uworld ＞Instance＞LocalPlayer ＞ playerController
+然后在player里+人物名字
+跟状态
+
+
+
+
+

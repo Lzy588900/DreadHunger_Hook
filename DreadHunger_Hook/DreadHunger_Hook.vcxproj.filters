@@ -121,10 +121,18 @@
     <None Include="kiero\minhook\dll_resources\MinHook.def">
       <Filter>kiero</Filter>
     </None>
+    <None Include="DreadHunger  (1).CT">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="kiero\minhook\dll_resources\MinHook.rc">
       <Filter>kiero</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Dreadhunger.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

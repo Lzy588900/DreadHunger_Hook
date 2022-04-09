@@ -7,20 +7,30 @@ WNDPROC oWndProc;
 ID3D11Device* pDevice = NULL;
 ID3D11DeviceContext* pContext = NULL;
 ID3D11RenderTargetView* mainRenderTargetView;
-
+bool menushow = false;
 void InitImGui()
 {
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
+	
 	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
+	ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\simhei.ttf", 15.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
+	io.IniFilename = nullptr;
+	io.LogFilename = nullptr;
 	ImGui_ImplWin32_Init(window);
 	ImGui_ImplDX11_Init(pDevice, pContext);
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	ImGuiIO& io = ImGui::GetIO();
 
-	if (true && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+	if (io.WantCaptureMouse&& menushow)//当鼠标在imgui窗口时 不传递游戏窗口消息
+	{
+		ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam);
 		return true;
+
+	}
+		
 
 	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
@@ -49,17 +59,28 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			return oPresent(pSwapChain, SyncInterval, Flags);
 	}
 
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
+	if (GetAsyncKeyState(VK_HOME) & 1)
+	{
+		menushow = !menushow;
+	}
 
-	ImGui::Begin("ImGui Window");
-	ImGui::End();
+	if (menushow)
+	{
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+	
+		ImGui::Begin(u8"辅助测试“Home”隐藏/显示");
+		ImGui::SetWindowSize(ImVec2(400, 500), 0);
 
-	ImGui::Render();
 
-	pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+		ImGui::End();
+
+		ImGui::Render();
+
+		pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	}
 	return oPresent(pSwapChain, SyncInterval, Flags);
 }
 
@@ -76,6 +97,9 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
 		}
 	} while (!init_hook);
+	AllocConsole();
+	freopen("CONOUT$", "a+", stdout);
+	cout << "打开控制台" << endl;
 	return TRUE;
 }
 
