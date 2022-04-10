@@ -60,6 +60,9 @@
     <ClCompile Include="kiero\minhook\src\hde\hde64.c">
       <Filter>kiero</Filter>
     </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes.h">
@@ -115,6 +118,18 @@
     </ClInclude>
     <ClInclude Include="kiero\minhook\src\hde\table64.h">
       <Filter>kiero</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="offset.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Class.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

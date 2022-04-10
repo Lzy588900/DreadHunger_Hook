@@ -7,12 +7,12 @@ WNDPROC oWndProc;
 ID3D11Device* pDevice = NULL;
 ID3D11DeviceContext* pContext = NULL;
 ID3D11RenderTargetView* mainRenderTargetView;
-bool menushow = false;
+bool menushow = true;
 void InitImGui()
 {
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
-	
+	draw_list = ImGui::GetForegroundDrawList();
 	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\simhei.ttf", 15.0f, NULL, io.Fonts->GetGlyphRangesChineseFull());
 	io.IniFilename = nullptr;
@@ -21,7 +21,7 @@ void InitImGui()
 	ImGui_ImplDX11_Init(pDevice, pContext);
 }
 
-LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {//窗口消息
 	ImGuiIO& io = ImGui::GetIO();
 
 	if (io.WantCaptureMouse&& menushow)//当鼠标在imgui窗口时 不传递游戏窗口消息
@@ -38,6 +38,7 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 bool init = false;
 HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
+	//初始化
 	if (!init)
 	{
 		if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)& pDevice)))
@@ -52,36 +53,45 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			pBackBuffer->Release();
 			oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)WndProc);
 			InitImGui();
+			Initdata(window);
 			init = true;
+			
 		}
 
 		else
 			return oPresent(pSwapChain, SyncInterval, Flags);
 	}
-
+	//快捷键激活窗口
 	if (GetAsyncKeyState(VK_HOME) & 1)
 	{
 		menushow = !menushow;
+		
 	}
+	//获取所有地址
+	updataAddress(window);
 
+	//imgui渲染
+
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
 	if (menushow)
 	{
-		ImGui_ImplDX11_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-	
-		ImGui::Begin(u8"辅助测试“Home”隐藏/显示");
-		ImGui::SetWindowSize(ImVec2(400, 500), 0);
-
-
-		ImGui::End();
-
-		ImGui::Render();
-
-		pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
-		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+		//绘制菜单
+		DrawMenu();
 	}
+	//绘制文本方框
+	DrawThread();
+	
+
+	//渲染结束
+	ImGui::Render();
+	pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
 	return oPresent(pSwapChain, SyncInterval, Flags);
+
+	
 }
 
 DWORD WINAPI MainThread(LPVOID lpReserved)
@@ -97,9 +107,8 @@ DWORD WINAPI MainThread(LPVOID lpReserved)
 
 		}
 	} while (!init_hook);
-	AllocConsole();
-	freopen("CONOUT$", "a+", stdout);
-	cout << "打开控制台" << endl;
+
+
 	return TRUE;
 }
 

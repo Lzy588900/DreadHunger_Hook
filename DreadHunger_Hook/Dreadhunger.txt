@@ -35,7 +35,7 @@ BP_CoveredCrate_Storage_Low_C=储藏室  1
 BP_OfficerSkeleton_C=坟墓 1 
 BP_CoalStorage_Sled_C=煤炭  1
 BP_CoalStorage_Sled_V2_C=煤炭  1
-BP_Cannibal_Stirage_8_C=尸体  1
+BP_Cannibal_Storage_8_C=尸体  1
 BP_Skeleton_Naked_04_C=骷髅     1BP_Skeleton_Naked_04_Snow_C=骨骼  1 BP_Skeleton_Naked_05_Snow_C=骨骼  1
 BP_StrongBox_NoSnow_C=保险箱 1
 
