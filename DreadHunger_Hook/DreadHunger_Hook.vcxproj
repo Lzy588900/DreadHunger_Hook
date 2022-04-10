@@ -61,6 +61,7 @@
   <ItemGroup>
     <None Include="DreadHunger  (1).CT" />
     <None Include="kiero\minhook\dll_resources\MinHook.def" />
+    <None Include="所有名字.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="kiero\minhook\dll_resources\MinHook.rc" />

@@ -67,6 +67,8 @@ vector<string> split(string str, string pattern)
 物资的名字 物资名字;
 动物设置 动物;
 动物的名字 动物名字;
+玩家设置 玩家;
+玩家的名字 玩家名字;
 bool 显示所有名字;
 namespace DrawTool {
 
@@ -224,6 +226,14 @@ void 绘制动物(string name, Vectors4 box, int 方框高度)
 	}
 
 }
+void 绘制玩家(string name, Vectors4 box, int 方框宽度, int 方框高度)
+{
+	if (玩家.玩家方框&& name ==玩家名字.玩家)
+	{
+		DrawTool::DrawTextA(name, box, 方框高度);
+		DrawTool::DrawBox(box,方框宽度,方框高度,RGB(200,200,200),1);
+	}
+}
 void DrawThread()
 {
 
@@ -271,11 +281,14 @@ void DrawThread()
 						if (显示所有名字)
 						{
 							DrawTool::DrawTextA(name, box, 方框高度);
+							box.y += 10;
+							string str = (char*)&对象地址;
+							DrawTool::DrawTextA(str, box, 方框高度);
 							continue;
 						}
 
 						绘制物资(name,box,方框高度);
-							
+						绘制玩家(name,box, 方框宽度, 方框高度);
 						
 
 
@@ -327,7 +340,10 @@ void DrawMenu()
 		ImGui::Checkbox(u8"食尸鬼", &动物.食尸鬼);
 		
 	}
-	ImGui::CollapsingHeader(u8"玩家设置");
+	if (ImGui::CollapsingHeader(u8"玩家设置"))
+	{
+		ImGui::Checkbox(u8"玩家方框", &玩家.玩家方框);
+	}
 	ImGui::CollapsingHeader(u8"自瞄设置");
 	ImGui::CollapsingHeader(u8"特殊设置");
 	//主要绘制代码

@@ -66,3 +66,13 @@ struct 动物的名字
 	std::string 熊 = "BP_Predator_Bear_C";
 	std::string 兔子 = "'BP_Prey_Rabbit_C";
 };
+struct 玩家设置
+{
+	bool 玩家方框 = false;
+	
+};
+struct 玩家的名字
+{
+	std::string 玩家 = "BP_HumanCharacter_C";
+
+};

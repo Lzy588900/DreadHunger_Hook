@@ -139,6 +139,9 @@
     <None Include="DreadHunger  (1).CT">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="所有名字.xlsx">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="kiero\minhook\dll_resources\MinHook.rc">
